@@ -1,0 +1,61 @@
+1.
+
+dp.patient_record.insertMany(
+[
+  {
+    "first name": "Nishtha",
+    "last name": "Kumari",
+    "age": 11,
+    "history": [
+      {
+        "disease": "cold",
+        "treatment": "medicines"
+      },
+      {
+        "height": 5.6,
+        "weight": "56 kg"
+      }
+    ]
+  },
+  {
+    "first name": "Rimjhim",
+    "last name": "Kumari",
+    "age": 13,
+    "history": [
+      {
+        "disease": "cold",
+        "treatment": "injection"
+      },
+      {
+        "weight": "45 kg"
+      }
+    ]
+  },
+  {
+    "first name": "Alisha",
+    "last name": "Kumari",
+    "age": 11,
+    "history": [
+      {
+        "disease": "fever",
+        "treatment": "injection"
+      },
+      {
+        "height": 6.0
+      }
+    ]
+  }
+])
+
+
+
+2. 
+db.patient_record.updateOne({_id :  ObjectId("64478c3cfba2ca5b810e1912")}, 
+{$set:{"name" : "Nisha", "age" : "1"0, "history" : [{"disease" : "cold", "treatment" : "scan"}]}})
+
+3. 
+db.patient_record.find({"age": {"$gt" : 10}})
+ 
+ 4. 
+ db.patient_record.deleteMany({"history.disease" : 'cold'})
+ 
