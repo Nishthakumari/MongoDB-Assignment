@@ -1,0 +1,27 @@
+1.
+use company
+
+2.
+db.company_data.insertOne({"name": "Google", "Founding Date": "1990-01-26"})
+
+
+3.
+db.company_data.insertMany([{"name": "DE Shaw", "Founding Date": "1990-01-26"}, {"name": "Microsoft", "Founding date" : "1989-02-23"}])
+
+
+4.
+db.company_data.find()
+
+5.
+db.company_data.insertMany([{"name": "ZS", "Founding Date" : "1780-2-12"},{"name": "Credit Suisse", "Founding Date": "1990-01-28"}],
+{writeConcern : {w:1, j=true}})
+
+
+6. 
+db.company_data.insertMany([{ "name": "ZS", "Founding Date": "1780-2-12" }, { "name": "Credit Suisse", "Founding Date": "1990-01-28" }], 
+{ writeConcern: { w: 0} })
+
+
+7.
+db.company_data.insertMany([{ "name": "ZS", "Founding Date": "1780-2-12" }, { "name": "Credit Suisse", "Founding Date": "1990-01-28" }], { ordered :true})
+
