@@ -1,0 +1,120 @@
+1.
+> mongoimport boxoffice.json -d boxOffice -c movieStart --jsonArray --drop
+
+2023-04-27T13:23:06.876+0530    connected to: mongodb://localhost/
+2023-04-27T13:23:06.880+0530    dropping: boxOffice.movieStart
+2023-04-27T13:23:06.925+0530    3 document(s) imported successfully. 0 document(s) failed to import.
+
+
+2.
+>db.movieStart.find().pretty()
+
+{
+        "_id" : ObjectId("644a29e2994b64665f9faf0d"),
+        "title" : "The Last Student Returns",
+        "meta" : {
+                "rating" : 9.5,
+                "aired" : 2018,
+                "runtime" : 100
+        },
+        "visitors" : 1300000,
+        "expectedVisitors" : 1550000,
+        "genre" : [
+                "thriller",
+                "drama",
+                "action"
+        ]
+}
+{
+        "_id" : ObjectId("644a29e2994b64665f9faf0e"),
+        "title" : "Teach me if you can",
+        "meta" : {
+                "rating" : 8.5,
+                "aired" : 2014,
+                "runtime" : 90
+        },
+        "visitors" : 590378,
+        "expectedVisitors" : 500000,
+        "genre" : [
+                "action",
+                "thriller"
+        ]
+}
+{
+        "_id" : ObjectId("644a29e2994b64665f9faf0f"),
+        "title" : "Supercharged Teaching",
+        "meta" : {
+                "rating" : 9.3,
+                "aired" : 2016,
+                "runtime" : 60
+        },
+        "visitors" : 370000,
+        "expectedVisitors" : 1000000,
+        "genre" : [
+                "thriller",
+                "action"
+        ]
+}
+
+
+3.
+> db.movieStart.find({$and :[{"meta.rating" : {$gt : 9.2} } , {"meta.runtime" : {$lt : 100}}]})
+
+[
+  {
+    _id: ObjectId("644a29e2994b64665f9faf0f"),
+    title: 'Supercharged Teaching',
+    meta: { rating: 9.3, aired: 2016, runtime: 60 },
+    visitors: 370000,
+    expectedVisitors: 1000000,
+    genre: [ 'thriller', 'action' ]
+  }
+]
+
+4. 
+> db.movieStart.find({$or :[{"genre" : "drama" } , {"genre" : "thriller"}]})
+
+
+[
+  {
+    _id: ObjectId("644a29e2994b64665f9faf0d"),
+    title: 'The Last Student Returns',
+    meta: { rating: 9.5, aired: 2018, runtime: 100 },
+    visitors: 1300000,
+    expectedVisitors: 1550000,
+    genre: [ 'thriller', 'drama', 'action' ]
+  },
+  {
+    _id: ObjectId("644a29e2994b64665f9faf0e"),
+    title: 'Teach me if you can',
+    meta: { rating: 8.5, aired: 2014, runtime: 90 },
+    visitors: 590378,
+    expectedVisitors: 500000,
+    genre: [ 'action', 'thriller' ]
+  },
+  {
+    _id: ObjectId("644a29e2994b64665f9faf0f"),
+    title: 'Supercharged Teaching',
+    meta: { rating: 9.3, aired: 2016, runtime: 60 },
+    visitors: 370000,
+    expectedVisitors: 1000000,
+    genre: [ 'thriller', 'action' ]
+  }
+]
+
+5.
+> db.movieStart.find({$expr : {$gt: ["$visitors", "$expectedVisitors"]}})
+
+[
+  {
+    _id: ObjectId("644a29e2994b64665f9faf0e"),
+    title: 'Teach me if you can',
+    meta: { rating: 8.5, aired: 2014, runtime: 90 },
+    visitors: 590378,
+    expectedVisitors: 500000,
+    genre: [ 'action', 'thriller' ]
+  }
+]
+
+
+
